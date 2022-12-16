@@ -9,7 +9,9 @@ import {
   ScrollView,
   Dimensions,
   ImageBackground,
+  BackHandler,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import { colors } from '../../utils/colors';
 import { fonts } from '../../utils/fonts';
@@ -38,7 +40,30 @@ export default function Login({ navigation }) {
       console.log('data token,', res);
       setToken(res.token);
     });
+
+    const backAction = () => {
+      Alert.alert("Raghiza", "Apakah kamu yakin akan keluar aplikasi ?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+
+
   }, []);
+
+
 
   // login ok
   const masuk = () => {

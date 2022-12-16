@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
 
       PushNotification.localNotification({
         /* Android Only Properties */
-        channelId: 'suryaconnect', // (required) channelId, if the channel doesn't exist, notification will not trigger.
+        channelId: 'raghiza', // (required) channelId, if the channel doesn't exist, notification will not trigger.
         title: obj.notification.title, // (optional)
         message: obj.notification.body, // (required)
       });
@@ -187,7 +187,7 @@ export default function Home({ navigation }) {
               color: colors.primary,
               fontFamily: fonts.secondary[600],
               fontSize: windowWidth / 25,
-            }}>Kategori Produk Surya Connect</Text>
+            }}>Kategori Produk Raghiza</Text>
           </View>
           <View style={{
             flex: 1,
