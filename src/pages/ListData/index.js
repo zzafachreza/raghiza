@@ -100,6 +100,16 @@ export default function ({ navigation, route }) {
             }}>
             {item.status}
           </Text>
+          <Text
+            style={{
+              fontSize: windowWidth / 35,
+              // color: colors.white,
+              textAlign: 'center',
+              color: colors.primary,
+              fontFamily: fonts.secondary[600],
+            }}>
+            {item.metode}
+          </Text>
         </View>
       </View>
 

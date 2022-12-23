@@ -46,12 +46,23 @@ export default function Checkout({ navigation, route }) {
   ]);
   const [modalVisible, setModalVisible] = useState(false);
   const [open, setOpen] = useState(false);
+  const [bank, setBank] = useState([]);
   const [comp, setComp] = useState({});
+  const [pilih, setPilih] = useState({
+    a: true,
+    b: false
+  })
   useEffect(() => {
 
     axios.post(urlAPI + '/company.php').then(c => {
       console.log(c.data);
       setComp(c.data);
+    })
+
+    axios.post(urlAPI + '/1data_bank.php').then(c => {
+      console.log(c.data);
+      // setComp(c.data);
+      setBank(c.data);
     })
 
 
@@ -61,6 +72,8 @@ export default function Checkout({ navigation, route }) {
       setKirim({
         ...kirim,
         catatan: '',
+        metode: 'Tunai',
+        bank: 'Tunai'
       })
     });
 
@@ -71,22 +84,33 @@ export default function Checkout({ navigation, route }) {
 
 
   const simpan = () => {
-    setLoading(true)
-    console.error('kirim', kirim);
-    axios.post(urlAPI + '/1add_transaksi.php', kirim).then(rr => {
-      // console.log('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data);
-      setTimeout(() => {
-        setLoading(false);
-        showMessage({
-          type: 'success',
-          message: 'Transaksi kamu berhasil dikirim'
-        });
 
-        // Linking.openURL('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data)
 
-        navigation.replace('ListData');
-      }, 1500)
-    })
+    if (kirim.bank == null) {
+      showMessage({
+        message: 'Silahkan pilih bank !',
+        type: 'danger'
+      })
+    } else {
+      setLoading(true)
+      console.error('kirim', kirim);
+      axios.post(urlAPI + '/1add_transaksi.php', kirim).then(rr => {
+        // console.log('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data);
+        setTimeout(() => {
+          setLoading(false);
+          showMessage({
+            type: 'success',
+            message: 'Transaksi kamu berhasil dikirim'
+          });
+
+          // Linking.openURL('https://api.whatsapp.com/send?phone=' + comp.tlp + rr.data)
+
+          navigation.replace('ListData');
+        }, 1500)
+      })
+
+    }
+
 
   };
 
@@ -141,8 +165,149 @@ export default function Checkout({ navigation, route }) {
             <MyInput onChangeText={x => setKirim({
               ...kirim,
               catatan: x
-            })} placeholder="Masukan catatan untuk pesanan" iconname="create" label="Catatan untuk Pesanan" />
+            })} placeholder="Masukan catatan untuk pesanan" iconname="create-outline" label="Catatan untuk Pesanan" />
           </View>
+
+
+          <View
+            style={{
+              marginHorizontal: 10,
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingVertical: 5,
+              marginVertical: 10
+            }}>
+            <Icon type="ionicon" name="wallet-outline" color={colors.primary} size={16} />
+            <Text
+              style={{
+                fontFamily: fonts.secondary[600],
+                color: colors.black,
+                left: 10,
+                fontSize: 12,
+              }}>
+              Metode Pembayaran
+            </Text>
+          </View>
+          <View style={{
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+          }}>
+            <View style={{
+              flex: 1,
+              paddingRight: 10,
+            }}>
+              <TouchableOpacity onPress={() => {
+                setPilih({
+                  a: true,
+                  b: false
+                })
+
+                setKirim({
+                  ...kirim,
+                  metode: 'Tunai',
+                  bank: 'Tunai'
+                })
+              }} style={{
+                borderWidth: 1,
+                borderColor: pilih.a ? colors.primary : colors.black,
+                backgroundColor: pilih.a ? colors.primary : colors.white,
+                padding: 10,
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: windowWidth / 25,
+                  color: pilih.a ? colors.white : colors.black,
+                }}>Tunai</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{
+              flex: 1,
+              paddingLeft: 10,
+            }}>
+              <TouchableOpacity onPress={() => {
+
+                setPilih({
+                  a: false,
+                  b: true
+                })
+
+
+                setKirim({
+                  ...kirim,
+                  metode: 'Transfer',
+                  bank: null
+                })
+
+              }
+              } style={{
+                borderWidth: 1,
+                padding: 10,
+                borderColor: pilih.b ? colors.primary : colors.black,
+                backgroundColor: pilih.b ? colors.primary : colors.white,
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: windowWidth / 25,
+                  color: pilih.b ? colors.white : colors.black,
+                }}>Transfer</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <MyGap jarak={20} />
+          {pilih.b &&
+
+            bank.map(i => {
+              return (
+                <TouchableOpacity onPress={() => {
+                  setKirim({
+                    ...kirim,
+                    bank: i.nama_bank
+                  })
+                }} style={{
+                  backgroundColor: i.nama_bank == kirim.bank ? colors.border_list : colors.white,
+                  padding: 10,
+                  flexDirection: 'row',
+                  borderBottomWidth: 1,
+                  borderBottomColor: colors.border_list
+                }}>
+                  <View style={{
+                    flex: 1,
+                  }}>
+                    <Text style={{
+                      fontFamily: fonts.primary[600],
+                      color: colors.black,
+                      fontSize: 12,
+                    }}>{i.nama_bank}</Text>
+                    <Text style={{
+                      fontFamily: fonts.primary[400],
+                      color: colors.black,
+                      fontSize: 12,
+                    }}>{i.rekening_bank}</Text>
+                    <Text style={{
+                      fontFamily: fonts.primary[400],
+                      color: colors.black,
+                      fontSize: 12,
+                    }}>A.N {i.atas_nama}</Text>
+                  </View>
+                  <Image source={{
+                    uri: i.image
+                  }} style={{
+                    width: 80,
+                    height: 50,
+                    resizeMode: 'contain'
+                  }} />
+                </TouchableOpacity>
+              )
+            })
+
+          }
 
 
 
