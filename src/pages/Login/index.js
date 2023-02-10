@@ -119,6 +119,7 @@ export default function Login({ navigation }) {
         showsVerticalScrollIndicator={false}
         style={{
           flex: 1,
+          padding: 10,
         }}>
         <View
           style={{
@@ -128,29 +129,21 @@ export default function Login({ navigation }) {
           <Image
             source={require('../../assets/logo.png')}
             style={{
-              width: 200,
-              height: 200,
+              width: 250,
+              height: 250,
+              resizeMode: 'contain'
               // aspectRatio: 1,
             }}
           />
         </View>
         <View style={styles.page}>
-          <Text
-            style={{
-              marginVertical: 20,
-              fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 25,
-              color: colors.textPrimary,
-              // maxWidth: 230,
-              textAlign: 'center',
-            }}>
-            Silahkan login untuk masuk ke aplikasi
-          </Text>
+
 
           <MyGap jarak={20} />
           <MyInput
             label="Nomor Telepon"
-            iconname="call"
+            placeholder="Masukan nomor telepon anda"
+            iconname="logo-whatsapp"
             value={data.telepon}
             keyboardType="phone-pad"
             onChangeText={value =>
@@ -163,8 +156,9 @@ export default function Login({ navigation }) {
 
           <MyGap jarak={20} />
           <MyInput
-            label="Password"
-            iconname="key"
+            label="Kata sandi"
+            placeholder="Masukan kata sandi anda"
+            iconname="lock-closed-outline"
             secureTextEntry={show}
             onChangeText={value =>
               setData({
@@ -179,12 +173,23 @@ export default function Login({ navigation }) {
           {valid && (
             <MyButton
               warna={colors.primary}
-              title="LOGIN"
-              Icons="log-in"
+
+              title="Masuk Sekarang"
+              Icons="log-in-outline"
               onPress={masuk}
             />
           )}
-
+          <Text
+            style={{
+              marginVertical: 20,
+              fontFamily: fonts.secondary[400],
+              fontSize: windowWidth / 30,
+              color: colors.textPrimary,
+              // maxWidth: 230,
+              textAlign: 'center',
+            }}>
+            Raghiza merupakan Usaha Bersama bergerak dalam jual beli sembako
+          </Text>
 
         </View>
       </ScrollView>

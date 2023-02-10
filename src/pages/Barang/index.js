@@ -120,7 +120,7 @@ export default function ({ navigation, route }) {
       key2: y,
     }).then(res => {
       setMykey('');
-
+      console.log(res.data)
       setLoading(false);
       setData(res.data);
     });
@@ -129,125 +129,156 @@ export default function ({ navigation, route }) {
 
 
 
+  // const renderItem = ({ item }) => (
+  //   <View style={{
+  //     flex: 1,
+  //     flexDirection: 'row',
+  //     marginVertical: 5,
+  //     borderBottomWidth: 1,
+  //     borderBottomColor: colors.border_list
+  //   }}>
+
+
+
+
+
+  //       </View>
+
+  //     </View>
+  //     <View style={{
+  //       justifyContent: 'center',
+  //       alignItems: 'center'
+  //     }}>
+  //       <Image source={{
+  //         uri: item.image
+  //       }} style={{
+  //         alignSelf: 'center',
+  //         width: 80,
+  //         height: 80,
+  //         borderRadius: 10,
+
+  //       }} />
+
+  //     </View>
+  //   </View>
+  // );
+
   const renderItem = ({ item }) => (
     <View style={{
-      flexDirection: 'row',
-      marginVertical: 5,
-      borderBottomWidth: 1,
-      borderBottomColor: colors.border_list
+      flex: 1,
+      borderWidth: 1,
+      borderColor: colors.border_list,
+      borderRadius: 10,
+      margin: 5,
     }}>
-      <View style={{
-        flex: 1,
-      }}>
-        <Text
-          style={{
-            marginVertical: 2,
-            fontSize: windowWidth / 30,
-            color: colors.black,
-            fontFamily: fonts.secondary[600],
-          }}>
-          {item.nama_barang}
-        </Text>
-        <Text
-          style={{
-            marginVertical: 2,
-            fontSize: windowWidth / 30,
-            color: colors.textSecondary,
-            fontFamily: fonts.secondary[400],
-          }}>
-          Rp. {new Intl.NumberFormat().format(item.harga_barang)}
-        </Text>
-        <View style={{
-          flexDirection: 'row',
 
+      <Image source={{
+        uri: item.image
+      }} style={{
+        alignSelf: 'center',
+        width: 80,
+        height: 80,
+      }} />
+
+      <TouchableOpacity onPress={() => {
+        axios.post(urlAPI + '/1add_wish.php', {
+          fid_user: user.id,
+          fid_barang: item.id
+        }).then(x => {
+          console.warn('add wishlist', x.data);
+
+          getDataBarang('', route.params.key)
+
+          if (x.data == 200) {
+            showMessage({
+              type: 'success',
+              message: item.nama_barang + ' berhasil ditambahkan ke favorit !'
+            })
+          } else {
+            showMessage({
+              type: 'danger',
+              message: item.nama_barang + ' sudah ada di favorit kamu !'
+            })
+          }
+        })
+
+      }} style={{
+        width: 30,
+        alignSelf: 'flex-end',
+      }}>
+        <Icon type='ionicon' size={15} color={wish.filter(i => i.id.toLowerCase().indexOf(item.id.toLowerCase()) > -1).length > 0 ? colors.danger : colors.black}
+          name='heart' />
+      </TouchableOpacity>
+
+      <View style={{
+        flexDirection: 'row'
+      }}>
+        <View style={{
+          paddingHorizontal: 5,
+          flex: 1,
+        }}>
+
+          <Text
+            style={{
+              fontSize: windowWidth / 35,
+              color: colors.textSecondary,
+              fontFamily: fonts.secondary[600],
+            }}>
+            Rp. {new Intl.NumberFormat().format(item.harga_barang)}
+          </Text>
+        </View>
+
+        <View style={{
+          paddingHorizontal: 5,
+          justifyContent: 'center',
+          alignItems: 'flex-start'
         }}>
           <Text
             style={{
-              marginVertical: 5,
-              fontSize: windowWidth / 35,
+              fontSize: windowWidth / 50,
               color: colors.white,
               paddingHorizontal: 5,
               backgroundColor: colors.primary,
               borderRadius: 3,
-              marginHorizontal: 2,
               fontFamily: fonts.secondary[600],
             }}>
             {item.satuan}
           </Text>
-
-
-
         </View>
-        <TouchableOpacity onPress={() => {
-          axios.post(urlAPI + '/1add_wish.php', {
-            fid_user: user.id,
-            fid_barang: item.id
-          }).then(x => {
-            console.warn('add wishlist', x.data);
-
-            getDataBarang('', route.params.key)
-
-            if (x.data == 200) {
-              showMessage({
-                type: 'success',
-                message: item.nama_barang + ' berhasil ditambahkan ke favorit !'
-              })
-            } else {
-              showMessage({
-                type: 'danger',
-                message: item.nama_barang + ' sudah ada di favorit kamu !'
-              })
-            }
-          })
-
-        }} style={{
-          width: 30,
-          marginVertical: 20,
-        }}>
-          <Icon type='ionicon' color={wish.filter(i => i.id.toLowerCase().indexOf(item.id.toLowerCase()) > -1).length > 0 ? colors.danger : colors.black}
-            name='heart' />
-        </TouchableOpacity>
       </View>
       <View style={{
-        justifyContent: 'center',
-        alignItems: 'center'
+        paddingHorizontal: 5,
+        height: 30,
       }}>
-        <Image source={{
-          uri: item.image
-        }} style={{
-          alignSelf: 'center',
-          width: 80,
-          height: 80,
-          borderRadius: 10,
-
-        }} />
-        <TouchableOpacity onPress={() => {
-          navigation.navigate('BarangDetail', item);
-
-
-
-          // setShow(item)
-
-          // modalizeRef.current.open();
-
-        }} style={{
-          width: 80,
-          borderRadius: 20,
-          borderWidth: 2,
-          borderColor: colors.primary,
-          marginVertical: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: 5,
-        }}>
-          <Text style={{
-            fontSize: windowWidth / 30,
-            color: colors.primary,
-            fontFamily: fonts.secondary[600],
-          }}>Detail</Text>
-        </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: windowWidth / 40,
+            color: colors.black,
+            fontFamily: fonts.secondary[400],
+          }}>
+          {item.nama_barang}
+        </Text>
       </View>
-    </View>
+      <TouchableOpacity onPress={() => {
+        navigation.navigate('BarangDetail', item);
+
+      }} style={{
+        borderRadius: 0,
+
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 5,
+        backgroundColor: colors.primary,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+      }}>
+        <Text style={{
+          fontSize: windowWidth / 30,
+          color: colors.white,
+          fontFamily: fonts.secondary[600],
+        }}>Lihat</Text>
+      </TouchableOpacity>
+    </View >
   );
 
   const __renderItemKategori = ({ item }) => {
@@ -339,18 +370,7 @@ export default function ({ navigation, route }) {
         flexDirection: 'row'
       }}>
 
-        <View style={{
-          flex: 0.3,
-          marginBottom: 50,
 
-        }}>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={kategori}
-            renderItem={__renderItemKategori}
-            keyExtractor={item => item.id}
-          />
-        </View>
 
         <View style={{
           flex: 1,
@@ -367,6 +387,7 @@ export default function ({ navigation, route }) {
           {!loading && <FlatList
             showsVerticalScrollIndicator={false}
             data={data}
+            numColumns={3}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />}

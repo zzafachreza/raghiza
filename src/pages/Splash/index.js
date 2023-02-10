@@ -58,11 +58,11 @@ export default function Splash({ navigation }) {
   }, []);
 
   return (
-    <SafeAreaView style={styles.page}>
+    <ImageBackground source={require('../../assets/splash.png')} style={styles.page}>
       <View
         style={{
           flex: 1,
-          justifyContent: 'center',
+          // justifyContent: 'center',
           alignItems: 'center'
         }}>
 
@@ -77,10 +77,10 @@ export default function Splash({ navigation }) {
           }}
         />
 
-        <ActivityIndicator size="large" color={colors.secondary} />
+        <ActivityIndicator size="large" color={colors.white} />
 
       </View>
-    </SafeAreaView >
+    </ImageBackground >
   );
 }
 

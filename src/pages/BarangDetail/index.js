@@ -131,7 +131,7 @@ export default function BarangDetail({ navigation, route }) {
                     height: 50,
                     // padding: 10,
                     paddingRight: 10,
-                    backgroundColor: colors.primary,
+                    backgroundColor: colors.white,
 
                     flexDirection: 'row',
                 }}>
@@ -143,7 +143,7 @@ export default function BarangDetail({ navigation, route }) {
                             justifyContent: 'center',
                             alignItems: 'center',
                         }}>
-                        <Icon type="ionicon" name="arrow-back-outline" color={colors.white} />
+                        <Icon type="ionicon" name="arrow-back-outline" color={colors.primary} />
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -151,7 +151,7 @@ export default function BarangDetail({ navigation, route }) {
                         style={{
                             fontFamily: fonts.secondary[600],
                             fontSize: windowWidth / 30,
-                            color: colors.white,
+                            color: colors.primary,
                         }}>
                         {item.nama_barang}
                     </Text>
@@ -183,7 +183,7 @@ export default function BarangDetail({ navigation, route }) {
 
 
                 }}>
-                    <Icon type='ionicon' color={colors.white} name='heart' />
+                    <Icon type='ionicon' color={colors.black} name='heart' />
                 </TouchableOpacity>
             </View>
             <View

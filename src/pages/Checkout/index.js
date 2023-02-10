@@ -127,28 +127,34 @@ export default function Checkout({ navigation, route }) {
             padding: 10,
             borderBottomWidth: 1,
             borderBottomColor: colors.border_list,
+            flexDirection: 'row'
           }}>
-            <Text style={{
-              color: colors.textPrimary,
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 30
-            }}>Pesananmu siap diteruskan ke toko, silahkan tulis catatan apabila ada yang ingin di tanyakan</Text>
-            {/* <Text style={{
-              fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 30,
-              color: colors.textPrimary,
+            <View style={{
+              flex: 1,
+            }}>
+              <Text style={{
+                fontFamily: fonts.secondary[400],
+                fontSize: windowWidth / 30,
+                color: colors.textPrimary,
 
-            }}>{user.nama_lengkap}</Text>
-            <Text style={{
-              fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 30,
-              color: colors.textPrimary
-            }}>{user.telepon}</Text>
-            <Text style={{
-              fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 30,
-              color: colors.textPrimary
-            }}>{user.alamat}</Text> */}
+              }}>{user.nama_lengkap}</Text>
+              <Text style={{
+                fontFamily: fonts.secondary[400],
+                fontSize: windowWidth / 30,
+                color: colors.textPrimary
+              }}>{user.telepon}</Text>
+              <Text style={{
+                fontFamily: fonts.secondary[400],
+                fontSize: windowWidth / 30,
+                color: colors.textPrimary
+              }}>{user.alamat}</Text>
+            </View>
+            <View>
+              <Image source={require('../../assets/logo.png')} style={{
+                width: 50,
+                height: 50
+              }} />
+            </View>
           </View>
 
 

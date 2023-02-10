@@ -223,7 +223,7 @@ export default function Cart({ navigation, route }) {
                 fontFamily: fonts.secondary[400],
                 flex: 1,
                 fontSize: windowWidth / 30,
-                color: colors.black
+                color: colors.primary,
               }}>
               {item.qty} {item.uom}
             </Text>
@@ -251,7 +251,7 @@ export default function Cart({ navigation, route }) {
                 fontSize: windowWidth / 25,
                 textAlign: 'center'
               }}>
-              {new Intl.NumberFormat().format(item.harga * item.qty)}
+              Rp {new Intl.NumberFormat().format(item.harga * item.qty)}
 
             </Text>
             <View style={{
@@ -268,7 +268,7 @@ export default function Cart({ navigation, route }) {
                 style={{
                   marginHorizontal: 5,
                 }}>
-                <Icon type='ionicon' name='create' color={colors.primary} />
+                <Icon type='ionicon' name='create-outline' color={colors.primary} />
               </TouchableOpacity>
 
 
@@ -466,7 +466,7 @@ export default function Cart({ navigation, route }) {
           fontFamily: fonts.secondary[600],
           fontSize: windowWidth / 15,
           color: colors.black
-        }}>   {new Intl.NumberFormat().format(sub)}</Text>
+        }}>  Rp {new Intl.NumberFormat().format(sub)}</Text>
       </View>
       {loading && <View style={{
         padding: 10
@@ -475,23 +475,10 @@ export default function Cart({ navigation, route }) {
         <View
           style={{
             padding: 10,
-            flexDirection: 'row',
           }}>
 
+          <MyButton warna={colors.primary} onPress={kirimServer} title="ORDER SEKARANG" Icons="cart-outline" />
 
-          <View style={{
-            flex: 1,
-            paddingRight: 5,
-          }}>
-            <MyButton warna={colors.tertiary} onPress={kirimServer2} title="SIMPAN" Icons="bookmark" />
-          </View>
-
-          <View style={{
-            flex: 1,
-            paddingLeft: 5,
-          }}>
-            <MyButton warna={colors.primary} onPress={kirimServer} title="ORDER KE TOKO" Icons="download" />
-          </View>
 
         </View>}
 

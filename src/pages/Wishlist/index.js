@@ -94,7 +94,7 @@ export default function ({ navigation, route }) {
                 <TouchableOpacity onPress={() => {
 
                     Alert.alert(
-                        "Surya Connect",
+                        "Raghiza Grosir",
                         "Apakah kamu yakin akan hapus ini ?",
                         [
                             {

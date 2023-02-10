@@ -544,9 +544,9 @@ export default function Router() {
         component={Cart}
         options={({ route, navigation }) => ({
           title: 'Keranjang',
-          headerTintColor: 'white',
+          headerTintColor: colors.black,
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: colors.white,
             elevation: 0, // remove shadow on Android
           },
           cardStyleInterpolator: ({ current, layouts }) => {
@@ -571,9 +571,9 @@ export default function Router() {
         component={Checkout}
         options={({ route, navigation }) => ({
           title: 'Checkout',
-          headerTintColor: 'white',
+          headerTintColor: colors.black,
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: colors.white,
             elevation: 0, // remove shadow on Android
           },
           cardStyleInterpolator: ({ current, layouts }) => {

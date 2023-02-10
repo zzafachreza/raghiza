@@ -57,7 +57,7 @@ export default function MyHeader({ telepon }) {
       style={{
         height: windowHeight / 10,
         padding: 10,
-        backgroundColor: colors.primary,
+        backgroundColor: colors.white,
       }}>
 
 
@@ -111,23 +111,10 @@ export default function MyHeader({ telepon }) {
 
 
           }}>
-          <Icon type='ionicon' name="logo-whatsapp" color={colors.white} />
+          <Icon type='ionicon' name="logo-whatsapp" color={colors.primary} />
 
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ListData2')}
-          style={{
-            position: 'relative',
-            width: 30,
-            height: 30,
-            justifyContent: 'center',
-            alignItems: 'center'
 
-
-          }}>
-          <Icon type='ionicon' name="bookmark-outline" color={colors.white} />
-
-        </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => navigation.navigate('Cart')}
@@ -140,12 +127,12 @@ export default function MyHeader({ telepon }) {
 
 
           }}>
-          <Icon type='ionicon' name="cart-outline" color={colors.white} />
+          <Icon type='ionicon' name="cart-outline" color={colors.primary} />
           <Text style={{
-            position: 'absolute', top: -5, right: -5, bottom: 5, backgroundColor: colors.white, width: 15,
+            position: 'absolute', top: -5, right: -5, bottom: 5, backgroundColor: colors.secondary, width: 15,
             textAlign: 'center',
             fontSize: 11,
-            height: 15, borderRadius: 10, color: colors.primary
+            height: 15, borderRadius: 10, color: colors.white
           }} >{cart}</Text>
 
         </TouchableOpacity>
@@ -159,7 +146,7 @@ export default function MyHeader({ telepon }) {
             alignItems: 'center'
 
           }}>
-          <Icon type='ionicon' name="person-outline" color={colors.white} />
+          <Icon type='ionicon' name="person-outline" color={colors.primary} />
 
 
         </TouchableOpacity>

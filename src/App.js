@@ -74,7 +74,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
+      <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
       <Router />
       <FlashMessage position="bottom" />
     </NavigationContainer>

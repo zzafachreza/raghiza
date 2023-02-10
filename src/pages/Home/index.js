@@ -115,11 +115,13 @@ export default function Home({ navigation }) {
         key: item.id,
         id_user: user.id
       })} style={{
-        backgroundColor: colors.secondary,
+        backgroundColor: colors.primary,
+        borderWidth: 1,
+        borderColor: colors.border_list,
         marginHorizontal: 5,
         borderRadius: 5,
         overflow: 'hidden',
-        flex: 0.5,
+        flex: 1,
         marginVertical: 5,
 
       }}>
@@ -136,14 +138,13 @@ export default function Home({ navigation }) {
           }} source={{
             uri: item.image
           }} />
+          <Text style={{
+            color: colors.white,
+            fontSize: windowWidth / 35,
+            fontFamily: fonts.secondary[400]
+          }}>{item.nama_kategori}</Text>
         </View>
-        <Text style={{
-          textAlign: 'left',
-          padding: 7,
-          color: colors.white,
-          fontFamily: fonts.secondary[600],
-          fontSize: windowWidth / 32,
-        }}>{item.nama_kategori}</Text>
+
       </TouchableOpacity>
     )
   }
@@ -155,44 +156,28 @@ export default function Home({ navigation }) {
         flex: 1,
         backgroundColor: colors.white,
       }}>
+
       <MyHeader telepon={comp.tlp} />
+
       <ScrollView style={{
         backgroundColor: colors.background1
       }}>
-        <MyGap jarak={10} />
-        <View style={{
-          paddingHorizontal: 10
-        }}>
-          <Text style={{
-            fontFamily: fonts.secondary[600],
-            fontSize: windowWidth / 28
-          }}>Halo {user.nama_lengkap}</Text>
-        </View>
-        <MyGap jarak={10} />
+
         <MyCarouser />
 
 
+        <Image source={require('../../assets/logo.png')} style={{
+          width: 100,
+          height: 100,
+          alignSelf: 'center'
+        }} />
         {/* list Kategoti */}
         <View>
-          <View style={{
-            flexDirection: 'row',
-            flex: 1,
-            paddingHorizontal: 10,
-            padding: 10,
-            alignItems: 'center'
-          }}>
-            <Icon type='ionicon' name="grid" color={colors.primary} />
-            <Text style={{
-              left: 10,
-              color: colors.primary,
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 25,
-            }}>Kategori Produk Raghiza</Text>
-          </View>
+
           <View style={{
             flex: 1,
           }}>
-            <FlatList numColumns={2} data={kategori} renderItem={__renderItemKategori} />
+            <FlatList numColumns={3} data={kategori} renderItem={__renderItemKategori} />
           </View>
         </View>
       </ScrollView>
